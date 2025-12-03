@@ -11,15 +11,15 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 
 const app = express();
 
-// Connect to MongoDB
+// Connect to DB
 connectDB();
 
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health Check Route
+// Health Check
 app.get('/', (req, res) => {
   res.json({
     message: 'Grievance Management System API',
@@ -28,19 +28,18 @@ app.get('/', (req, res) => {
   });
 });
 
-// API Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/grievances', grievanceRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
-// Error Handler Middleware
+// Error Handler
 app.use(errorHandler);
 
-// PORT — Render will inject its own port automatically
+// Render will inject PORT automatically
 const PORT = process.env.PORT || 5000;
 
-// Start Server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
